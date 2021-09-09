@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Up Book {% endblock title %}
+
+{% block content %}
+    <h1>Update book data here</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success" style="margin-bottom: 2rem;">Update</button>
+    </form>
+{% endblock content %}
+
+

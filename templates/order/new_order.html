@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+{% block title %} New Order {% endblock title %}
+
+{% block content %}
+<h1>Order the product here</h1>
+
+<div>
+    <form action="" method="POST" style="margin-top: 2rem;">
+    {% csrf_token %}
+        <p style="font-size: 18px; margin-bottom:0;">Credit Card*</p>
+        <input type="text" name="card_number" placeholder="Credit Card Number"><br>
+        
+        <p style="font-size: 18px; margin-bottom:0; margin-top: 2rem;">Delivery location*</p>
+        <input type="text" name="deliver_to" placeholder="City, Country"><br>
+
+        <p style="font-size: 18px; margin-bottom:0; margin-top: 2rem;">Ordered in (will be delivered in 5 days)*</p>
+        <input type="datetime-local" name="date_of_order"><br>
+        
+        <button type="submit" class="btn btn-warning" style="margin-top: 2rem;">Send</button>
+    </form>
+</div>
+
+<div>
+    {% for message in messages %}
+        <h4>{{ message }}</h4>
+    {% endfor %}
+</div>
+{% endblock content %}

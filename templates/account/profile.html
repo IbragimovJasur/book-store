@@ -1,0 +1,11 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Update Profile {% endblock title %}
+
+{% block content %}
+    <!-- User data -->
+    <p style="font-size: 24px;"><span style="font-weight: bold">First Name: </span>{{ user_data.first_name }}</p>
+    <p style="font-size: 24px;"><span style="font-weight: bold">Last Name: </span>{{ user_data.last_name }}</p>
+    <p style="font-size: 24px;"><span style="font-weight: bold">Username: </span>{{ user_data.username }}</p>
+    <p style="font-size: 24px;"><span style="font-weight: bold">Email: </span>{{ user_data.email }}</p>
+{% endblock content %}

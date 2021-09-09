@@ -1,0 +1,56 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} {{ book.title }} {% endblock title %}
+
+{% block content %}
+    <!-- Book information -->
+    {% if book.image %}
+        <img class="bookcover" src="{{ book.image.url }}" alt="{{ book.title }}">
+    {% endif %}
+    <h2 style="color: blue;">{{ book.title }}</h2>
+    <p>Author: {{ book.author }}</p>
+    <p style="margin-bottom: 1rem;">Price: ${{ book.price }}</p>
+    <!-- If request.user is the author -->
+    {% if book.posted_by == request.user %}
+        <p><a href="{% url 'update_book' book.id %}" style="font-size:large;">Edit</a></p>
+    {% endif %}
+
+    <!-- Buy -->
+    <button type="submit" class="btn btn-warning"><a href="{% url 'new_order' book.id %}" style="color: black;">Buy</a></button>
+    
+    <!-- Comments section -->
+    <h3 style="margin-top: 3rem; margin-bottom: 1rem;">Reviews</h3>
+        {% for review in book.reviews.all %}
+            <h5 style="margin-top: 1rem;">{{ review.author }}</h5>
+            <p style="font-size: 18px;">{{ review.sentence }}
+
+                <!-- Delete the comment section -->
+                {% if review.author_id == request.user.id %}
+                    <form action="{{ review.id }}/delete/" method="POST" style="display: inline;">
+                        {% csrf_token %}
+                        <button class="btn btn-danger" style="font-size: 10px; margin-left: 1rem;">delete</button>
+                    </form>
+                {% endif %}
+            </p>
+
+        {% endfor %}
+
+    <!-- Form to make a comment -->
+    <div style="margin-bottom: 1rem; margin-top: 2rem;">
+        <form action="newcomment/" method="POST">
+            {% csrf_token %}
+            <input type="text" name="sentence" placeholder="add comment">
+            <button type="submit" class="btn btn-success" style="margin-left: 1rem; font-size: 12px; margin-bottom: 0.5rem;">Post</button>
+  
+        </form>
+        <!-- Messages -->
+        {% for message in messages %}
+            <h4>{{ message }}</h4>
+        {% endfor %}
+        
+    </div>
+
+{% endblock content %}
+
+
+

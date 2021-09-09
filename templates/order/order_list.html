@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+{% block title %} My Orders {% endblock title %}
+
+
+{% block content %}
+<h1> Orders haven't been delivered: </h1>
+
+    {% for order in all_orders %}
+        <div style="margin-top: 2.5rem;">
+            {% if order.book.image %}
+                <img class="bookcover" src="{{ order.book.image.url }}">
+            {% endif %}
+            <div style="font-size: 18px;">
+                <p><span style="font-weight: bold;">Ordered in: </span>{{ order.date_of_order }}</p>
+                <p><span style="font-weight: bold;">Will be delivered in: </span>{{ order.date_of_delivery.date }}</p>
+                <p><span style="font-weight: bold;">Deliver to:</span> {{ order.deliver_to }}</p>    
+            </div>
+            
+        </div>
+        
+    {% endfor %}
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %} Home Page {% endblock title %}
+
+{% block content %}
+    <h1 style="margin-bottom: 2rem;">All Books in Sale:</h1>
+    
+    <!-- Book List -->
+    {% for book in all_books %}
+        <div style="display:inline;">
+            {% if book.image %}
+                <img class="bookcover" src="{{ book.image.url }}" alt="{{ book.title }}">
+            {% endif %}
+                <h2><a href="{% url 'book_detail' book.id %}" style="color: blue;">{{ book.title }}</a></h2>
+                <p>Author: {{ book.author }}</p>
+                <p style="margin-bottom: 3rem;">Price: ${{ book.price }}</p>
+        </div>
+    {% endfor %}
+    
+{% endblock content %}
+
+
+
